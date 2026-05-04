@@ -8,7 +8,9 @@ export default class App extends React.Component {
     this.pexelsClient = createClient(import.meta.env.API_PEXELS)
   }
   onBuscaRealizada = (termoDeBusca) => {
-    console.log(termoDeBusca)
+    this.pexelsClient.photos.search({query: termoDeBusca, per_page: 10}).then(result => {
+      console.log(result)
+    })
   }
   render() {
     return (
