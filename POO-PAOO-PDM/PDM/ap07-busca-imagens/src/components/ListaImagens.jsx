@@ -5,16 +5,18 @@ import Imagem from './Imagem'
 
 const ListaImagens = ({photos}) => {
   return (
-    <div>
-      {
-        photos.map((photo, key) => (
-          <Imagem 
-            src={photo.src.small}
-            alt={photo.alt}
-            key={key}
-          />
-        ))
-      }
+    <div className="flex flex-column align-items-center gap-2">
+      <div>
+        {
+          photos.map((photo, key) => (
+            <Imagem 
+              src={photo.src.small}
+              alt={photo.alt}
+              key={key}
+            />
+          ))
+        }
+      </div>
     </div>
   )
 }
