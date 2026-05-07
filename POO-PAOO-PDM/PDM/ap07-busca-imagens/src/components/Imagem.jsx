@@ -1,8 +1,11 @@
+// rafce
 import React from 'react'
 
-const Imagem = () => {
+const Imagem = ({src, alt}) => {
   return (
-    <div>Imagem</div>
+    <div>
+      <img src={src} alt={alt} />
+    </div>
   )
 }
 
