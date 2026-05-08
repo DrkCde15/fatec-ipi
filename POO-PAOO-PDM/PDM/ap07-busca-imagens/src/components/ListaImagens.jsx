@@ -3,21 +3,20 @@
 import React from 'react'
 import Imagem from './Imagem'
 
-const ListaImagens = ({photos}) => {
+const ListaImagens = ({photos, imgStyle}) => {
   return (
-    <div className="flex flex-column align-items-center gap-2">
-      <div>
+      <div className="grid">
         {
           photos.map((photo, key) => (
             <Imagem 
               src={photo.src.small}
               alt={photo.alt}
               key={key}
+              imgStyle={imgStyle}
             />
           ))
         }
       </div>
-    </div>
   )
 }
 

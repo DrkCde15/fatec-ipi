@@ -2,7 +2,8 @@
 import React from 'react'
 import Busca from './Busca'
 import PexelsLogo from './PexelsLogo'
-import { createClient } from 'pexels'
+//import { createClient } from 'pexels'
+import PexelsClient from '../utils/PexelsClient'
 import ListaImagens from './ListaImagens'
 export default class App extends React.Component{
 
@@ -10,20 +11,28 @@ export default class App extends React.Component{
     photos: []
   }
 
-  pexelsClient = null
-
-  componentDidMount(){
-    this.pexelsClient = createClient(import.meta.env.VITE_API_PEXELS)
-  }
-
   onBuscaRealizada = (termoDeBusca) => {
-    this.pexelsClient.photos.search({
-      query: termoDeBusca
+    PexelsClient.get('search', {
+      params: {query: termoDeBusca}
     })
-    .then(result => {
-      this.setState({photos: result.photos})  
-    })
+    .then(result => this.setState({photos: result.data.photos}))
   }
+
+  //pexelsClient = null
+
+  // onBuscaRealizada = (termoDeBusca) => {
+  //   this.pexelsClient.photos.search({
+  //     query: termoDeBusca
+  //   })
+  //   .then(result => {
+  //     this.setState({photos: result.photos})  
+  //   })
+  // }
+
+  // componentDidMount(){
+  //   this.pexelsClient = PexelsClient
+  // }
+
   render(){
     return (
       // .grid.justify-content-center.m-auto.w-9.border-round.border-1.border-400
@@ -38,9 +47,10 @@ export default class App extends React.Component{
           <Busca 
             onBuscaRealizada={this.onBuscaRealizada}/>
         </div>
-        <div className="col-12">
+        <div className="grid">
           <ListaImagens 
-            photos={this.state.photos}/>
+            photos={this.state.photos}
+            imgStyle={'col-12 md:col-6 lg:col-4 xl:col-3'}/>
         </div>
       </div>
     )
